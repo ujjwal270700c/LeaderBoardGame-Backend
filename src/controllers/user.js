@@ -21,8 +21,10 @@ exports.CreateUser=async(req,res)=>{
         newUser.Password=await bcrypt.hash(Password,salt);
         const data=await newUser.save();
         const payload={
-                id:newUser._id
+                id:newUser._id,
+                Role:newUser.Role
         };
+      
         jwt.sign(payload,process.env.SecretKey,{
             expiresIn:360000
         }, (err,token)=>{
@@ -47,8 +49,10 @@ exports.LoginUser=async(req,res)=>{
             return res.status(401).json({msg:"Wrong password"})
         }
         const payload={
-                id:user._id
+                id:user._id,
+                Role:user.Role
         };
+        console.log(payload);
         jwt.sign(payload,process.env.SecretKey,{
             expiresIn:360000
         }, (err,token)=>{
