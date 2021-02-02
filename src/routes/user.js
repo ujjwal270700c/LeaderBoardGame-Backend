@@ -1,9 +1,10 @@
 const express=require('express');
 const router=express.Router();
-const {CreateUser,LoginUser,UpdateUser}=require('../controllers/user')
+const {CreateUser,LoginUser,UpdateUser,DeleteUser}=require('../controllers/user')
 
-router.post('/api/signup',CreateUser);
-router.post('/api/signin',LoginUser);
-router.put('/:id',UpdateUser);
+router.post('/api/user/signup',CreateUser);
+router.post('/api/user/signin',LoginUser);
+router.put('/api/user/:id',UpdateUser);
+router.delete('/api/user/:id',DeleteUser);
 
 module.exports=router;
