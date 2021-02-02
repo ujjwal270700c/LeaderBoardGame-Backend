@@ -6,7 +6,8 @@ const port =process.env.PORT || 5000;
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
-app.use('/',require('./src/routes/user'))
+app.use('/',require('./src/routes/user'))  // user Api
+app.use('/',require('./src/routes/admin'))  // Admin Api
 app.get('/',(req,res)=>{
     res.send('Hello')
 })
