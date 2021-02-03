@@ -7,7 +7,7 @@ const PayloadSchema = new mongoose.Schema(
       ref: "Game",
       required: true,
     },
-    Players: {
+    Players: [{
       Player1: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -35,6 +35,7 @@ const PayloadSchema = new mongoose.Schema(
         default: false,
       },
     },
+    ]
   },
   { timestamps: true }
 );

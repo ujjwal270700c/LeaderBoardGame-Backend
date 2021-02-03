@@ -9,7 +9,8 @@ app.use(express.urlencoded({extended:true}))
 app.use('/',require('./src/routes/user'))  // user Api
 app.use('/',require('./src/routes/admin'))  // Admin Api
 app.use('/',require('./src/routes/game')) // Game Api
-app.use('/',require('./src/routes/payload'))   //payload Api
+app.use('/',require('./src/routes/payload'))   //payload Api 
+app.use('/',require('./src/routes/Leaderboard'))   // leaderBoard APi
 app.get('/',(req,res)=>{
     res.send('Hello')
 })

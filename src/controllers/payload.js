@@ -4,14 +4,15 @@ const GameModel = require("../db/models/game");
 exports.CreatePayload = async (req, res) => {
   try {
     const { Players } = req.body;
-    const P1_Score = Players.Player1_Score;
-    const P2_Score = Players.Player2_Score;
+    console.log(Players);
+    const P1_Score = Players[0].Player1_Score;
+    const P2_Score = Players[0].Player2_Score;
     if (P1_Score > P2_Score) {
-      Players.Player1_Wins = true;
-      Players.Player2_Wins = false;
+      Players[0].Player1_Wins = true;
+      Players[0].Player2_Wins = false;
     } else {
-      Players.Player2_Wins = true;
-      Players.Player1_Wins = false;
+      Players[0].Player2_Wins = true;
+      Players[0].Player1_Wins = false;
     }
     const GameName = req.params.id;
     console.log(GameName);
@@ -23,9 +24,9 @@ exports.CreatePayload = async (req, res) => {
     const data = await newPayload.save(); // payload store in db
     res.json(data);
 
-    const P1WIN = newPayload.Players.Player1_Wins;
-    let P1 = newPayload.Players.Player1;
-    let P2 = newPayload.Players.Player2;
+    const P1WIN = newPayload.Players[0].Player1_Wins;
+    let P1 = newPayload.Players[0].Player1;
+    let P2 = newPayload.Players[0].Player2;
     async function runUpdate(condition, updateData) {
       console.log(condition, updateData);
       const result = await GameModel.findOneAndUpdate(
@@ -120,3 +121,19 @@ exports.CreatePayload = async (req, res) => {
     res.status(500).send("server error");
   }
 };
+
+
+exports.GetPayloadByUser=async (req,res)=>{
+    
+  try {
+    userId=req.user.id
+   const data= await PayLoadModel.find({GameName:req.params.id})
+   res.json(data)
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("server error");
+  }
+
+
+}
