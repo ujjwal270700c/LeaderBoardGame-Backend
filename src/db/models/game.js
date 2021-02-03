@@ -17,8 +17,8 @@ const GameSchema = new mongoose.Schema({
             required:true
         },
         totalWins:{
-            type:Number,
-            required:true
+          type:Number,
+          required:true
         }
      }
     

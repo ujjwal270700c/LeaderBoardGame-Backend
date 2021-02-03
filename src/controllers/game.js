@@ -1,7 +1,7 @@
 const GameModel = require("../db/models/game");
 
 exports.CreateGame = async (req, res) => {
-  const { Name } = req.body;
+  const { Name,Users } = req.body;
   try {
     let game = await GameModel.findOne({ Name });
     if (game) {
@@ -9,6 +9,7 @@ exports.CreateGame = async (req, res) => {
     }
     const newGame = new GameModel({
       Name,
+      Users
     });
     let data = await newGame.save();
     res.json({data})
