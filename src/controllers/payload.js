@@ -14,6 +14,7 @@ exports.CreatePayload = async (req, res) => {
       Players.Player1_Wins = false;
     }
     const GameName = req.params.id;
+    console.log(GameName);
     const newPayload = new PayLoadModel({
       GameName,
       Players,
@@ -38,6 +39,7 @@ exports.CreatePayload = async (req, res) => {
           new: true,
         }
       );
+ 
     }
     /// updating leaderBoard
     let GameUsers = await GameModel.findById(GameName);
@@ -65,7 +67,7 @@ exports.CreatePayload = async (req, res) => {
       if (item1.user == P1.toString()) {
         console.log("done");
         const Total = item1.totalPoints + p1Score;
-        condition = {
+        condition = {"_id":GameName,
           "Users.user": P1,
         };
 
@@ -95,7 +97,7 @@ exports.CreatePayload = async (req, res) => {
       if (item2.user == P2.toString()) {
         console.log("done");
         const Total = item2.totalPoints + p2Score;
-        condition = {
+        condition = { "_id":GameName,
           "Users.user": P2,
         };
 
