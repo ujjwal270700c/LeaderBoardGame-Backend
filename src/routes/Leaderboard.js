@@ -3,6 +3,9 @@ const router=express.Router();
 const GameModel=require('../db/models/game')
 const {requireSignin, userMiddleware} =require('../middlewares/common')
 
+    // /api/leaderboard/:id    id should be game ID
+
+
 router.get('/api/leaderboard/:id',requireSignin,userMiddleware ,async (req,res)=>{
      try {
          const data = await GameModel.findById({_id:req.params.id})
